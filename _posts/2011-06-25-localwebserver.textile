@@ -27,5 +27,6 @@ serve
 If you're using Windows, create a file named @serve.bat@, with the following content (replacing $\@ for %%, and double-quotes):
 
 <pre class="brush: bash">
-plackup -MPlack::App::Directory -MCwd -e "Plack::App::Directory->new(root => getcwd);" %%
+plackup -MPlack::App::Directory -MCwd \
+    -e "Plack::App::Directory->new(root => getcwd);" %%
 </pre>

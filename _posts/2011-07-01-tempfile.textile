@@ -1,0 +1,29 @@
+---
+layout: post
+title: Working with temp files
+tags: any
+---
+ 
+Nowadays, my favorite way of working with tempfiles as temporary storage is by using the @IO::All@ module:
+
+<pre class="brush: perl">
+use strict;
+use IO::All;
+my $temp = io '?';
+"some temp data" >> $temp ;
+$temp->seek(0,0);  # reset back to the top of the file
+print $temp->slurp;
+</pre>
+
+Or you can use that good-old Perl built-in module, @File::Temp@ (from perlfaq5):
+
+<pre class="brush: perl">
+use File::Temp qw/ tempfile tempdir /;
+
+my $dir = tempdir( CLEANUP => 1 );
+($fh, $filename) = tempfile( DIR => $dir );
+
+# or if you don't need to know the filename
+
+my $fh = tempfile( DIR => $dir );
+</pre>
